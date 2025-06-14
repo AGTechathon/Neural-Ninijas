@@ -45,11 +45,41 @@ float calibrationGlucoseOffset = 0;
 bool calibrationMode = false;
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.println(F("HemoSense Init..."));
 
+  // Initialize pins
+  pinMode(BUZZER, OUTPUT);
+  pinMode(IR_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+  pinMode(RED_LED, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  // Initialize MAX30105
+  if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) {
+    Serial.println(F("ERROR: MAX30105 not found!"));
+    errorAlert();
+    while (1)
+      ;
+  }
+
+  Serial.println(F("MAX30105 found!"));
+
+  // Configure sensor for better heart rate detection
+  particleSensor.setup(60, 4, 2, 100, 411, 4096);  // Changed ledMode to 2 (Red only)
+  particleSensor.setPulseAmplitudeRed(0x0A);       // Reduced amplitude for better signal
+  particleSensor.setPulseAmplitudeGreen(0);
+
+  // Clear rate array
+  for (byte i = 0; i < RATE_ARRAY; i++) {
+    rates[i] = 0;
+  }
+
+  digitalWrite(GREEN_LED, HIGH);
+  Serial.println(F("Ready! Send 'CAL' for calibration"));
+  Serial.println(F("Press button to measure"));
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
 }
