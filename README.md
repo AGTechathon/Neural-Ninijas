@@ -28,7 +28,7 @@ Then add to Arduino/libraries folder
 ## 🔧 Hardware Components
 
 ### Main Sensor
-- *MAX30105* - Heart rate, pulse oximetry, and particle sensor
+- *MAX30102* - Heart rate, pulse oximetry, and particle sensor
   - I2C communication
   - 3.3V or 5V compatible
   - Built-in LEDs (Red, IR, Green)
@@ -72,7 +72,7 @@ Pin A0 ↔ Photoresistor → 10kΩ → GND
 | Component | Quantity | Purpose |
 |-----------|----------|---------|
 | Arduino Uno/Nano | 1 | Microcontroller |
-| MAX30105 Sensor | 1 | Heart rate detection |
+| MAX30102 Sensor | 1 | Heart rate detection |
 | LEDs (Red, Green) | 2 | Status indicators |
 | IR LED | 1 | Additional sensing |
 | Buzzer | 1 | Audio alerts |
